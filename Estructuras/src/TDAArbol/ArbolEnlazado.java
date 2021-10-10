@@ -346,6 +346,37 @@ public class ArbolEnlazado<E> implements Tree<E> {
 		}
 	}
 	
+	public Tree<E> clone(){
+		Tree<E> clon = new ArbolEnlazado<E>();
+		if(raiz!=null) {
+			try {
+				clon.createRoot(raiz.element());
+				clonarRec(raiz,clon.root(),clon);
+			} catch (InvalidOperationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (EmptyTreeException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		return clon;
+	}
+	
+	private void clonarRec(TNodo<E> nodo, Position<E> nodoClon, Tree<E> clon) {
+		for(TNodo<E> hijo: nodo.getHijos()) {
+			try {
+				Position<E> hijoClon = clon.addLastChild(nodoClon, hijo.element());
+				clonarRec(hijo,hijoClon,clon);
+			} catch (InvalidPositionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
 	////////////////////////////////////////////////OPERACIONES/////////////////////////////////////////////////////////////////////////////////
 	public void listar(boolean p) {
 		if (size!=0) {
