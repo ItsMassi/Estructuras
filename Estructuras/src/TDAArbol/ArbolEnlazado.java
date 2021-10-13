@@ -527,4 +527,52 @@ public class ArbolEnlazado<E> implements Tree<E> {
 			e.printStackTrace();
 		}
 	}
+	
+	public Position<E> FindShell(Position<E> p) throws EmptyTreeException, InvalidPositionException{
+		Position<E> check = null;
+		Position<E> retorno = null;
+		if(this.isEmpty()) {
+			throw new EmptyTreeException("el arbol no puede se vacio");
+		}
+		if(p.element()==null) {
+			throw new InvalidPositionException("el nodo no puede se vacio");
+		}
+		
+		if(raiz.element()==p.element()) {
+			return raiz;
+		}
+		
+		if(raiz.getHijos().isEmpty()) {
+			return null;
+		}else {
+			for(Position<E> k : raiz.getHijos()) {
+				check = find(k,p);
+				if(check!=null) {retorno = check;}
+			}
+		}
+		
+		return retorno;
+	}
+	
+	private Position<E> find(Position<E> k, Position<E> p) throws InvalidPositionException{
+		Position<E> retorno = null;
+		TNodo<E> kn = checkPosition(k);
+		if(k.element() == p.element()) {
+			return k;
+		}else {
+			if(!kn.getHijos().isEmpty()) {
+				for(Position<E> l : kn.getHijos()) {
+					retorno = find(l,p);
+				}
+			}
+		}
+		return retorno;
+	}
+
+	@Override
+	public void printHijosShell() throws EmptyTreeException, InvalidPositionException {
+		// TODO Auto-generated method stub
+		
+	}
+
  }

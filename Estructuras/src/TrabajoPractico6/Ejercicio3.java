@@ -6,7 +6,7 @@ public class Ejercicio3 {
 	
 	public static void main(String[] args) {
 
-		try {
+		/*try {
 			Tree<Integer> arbol = new ArbolEnlazado<Integer>(); //Creo un arbol de enteros
 			
 			arbol.createRoot(1);
@@ -161,6 +161,42 @@ public class Ejercicio3 {
 				System.out.print(p.element()+" ");
 			}
 		} catch (InvalidOperationException | InvalidPositionException | EmptyTreeException | BoundaryViolationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		
+		/*├
+		 *└*/
+		
+		Tree<Integer> arbol = new ArbolEnlazado<Integer>(); //Creo un arbol de enteros
+		
+		try {
+			arbol.createRoot(1);
+			Position<Integer> raiz = arbol.root();
+			
+			
+			// Momento de armar el arbol
+			// Debo agregarle hijos a la raiz, en este caso es el 1
+			// En especifico 2 3 4
+			
+			Position<Integer> h2 = arbol.addFirstChild(raiz, 2);
+			Position<Integer> h3 = arbol.addFirstChild(raiz, 3);
+			Position<Integer> h4 = arbol.addFirstChild(raiz, 4);
+			
+			//Agrego hijos a h2
+			Position<Integer> h5 = arbol.addFirstChild(h2, 5);
+			Position<Integer> h6 = arbol.addFirstChild(h2, 6);
+			
+			//Agregp hijos a h3
+			Position<Integer> h7 = arbol.addFirstChild(h3, 7);
+			
+			//Agrego hijos a h7
+			Position<Integer> h8 = arbol.addFirstChild(h7, 8);
+			Position<Integer> h9 = arbol.addFirstChild(h7, 9);
+			Position<Integer> buscar = new TNodo<Integer>(11, null);
+			Position<Integer> kekw = arbol.FindShell(buscar);
+			System.out.println(kekw.element());
+		} catch (InvalidOperationException | EmptyTreeException | InvalidPositionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
